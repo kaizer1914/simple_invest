@@ -1,6 +1,7 @@
 import sys
 
-from PyQt6.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QApplication
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QApplication, QSplitter
 
 
 class Enter_Company_Msfo(QWidget):
