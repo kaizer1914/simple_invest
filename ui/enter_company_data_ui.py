@@ -3,6 +3,7 @@ from database_tables.msfo_table import Msfo_table
 
 class Enter_company_data_ui:
     def __init__(self):
+        self.__input_year = year
         try:
             ticker = str(input("Введите тикер компании: "))
             self.__msfo = Msfo_table(ticker)
@@ -30,7 +31,6 @@ class Enter_company_data_ui:
         try:
             year = int(input("Введите год финансового отчета: "))
             self.__msfo.set_year(year)
-            self.__input_year = year
         except ValueError:
             self.show_year()
 
