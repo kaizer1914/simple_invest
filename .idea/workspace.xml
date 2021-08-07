@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="Revert &quot;Revert &quot;first commit&quot;&quot;&#10;&#10;This reverts commit 8b86de3d1c44e833cbb35c180fe0bf94163fc2f3.">
+    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="К форме сохранения данных по МСФО добавлены кнопки и обработчики этих кнопок">
+      <change beforePath="$PROJECT_DIR$/.idea/rus_invest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rus_invest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/enter_company_msfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/enter_company_msfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/analyser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/multiplier.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/multiplier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moex_stock_data/check_security.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/check_security.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moex_stock_data/moex_data_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/moex_data_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moex_stock_data/moex_stock_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/moex_stock_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +25,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="2" />
   </component>
   <component name="ProjectId" id="1wK03hLzqstBkI2tayKhK5LDBss" />
   <component name="ProjectViewState">
@@ -92,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628260714620</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="К форме сохранения данных по МСФО добавлены кнопки и обработчики этих кнопок">
+      <created>1628278154742</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1628278154742</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,9 +176,11 @@
         <entry key="841f944e-f233-417a-ba9f-8a88852b8842" value="TOOL_WINDOW" />
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Revert &quot;Revert &quot;first commit&quot;&quot;&#10;&#10;This reverts commit 8b86de3d1c44e833cbb35c180fe0bf94163fc2f3." />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Revert &quot;first commit&quot;&quot;&#10;&#10;This reverts commit 8b86de3d1c44e833cbb35c180fe0bf94163fc2f3." />
+    <MESSAGE value="К форме сохранения данных по МСФО добавлены кнопки и обработчики этих кнопок" />
+    <option name="LAST_COMMIT_MESSAGE" value="К форме сохранения данных по МСФО добавлены кнопки и обработчики этих кнопок" />
   </component>
 </project>

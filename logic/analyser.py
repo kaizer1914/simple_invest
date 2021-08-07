@@ -4,7 +4,7 @@ from database_tables.bonds_table import Bonds_table
 from database_tables.etf_table import Etf_table
 from database_tables.securities_table import Securities_table
 from database_tables.shares_table import Shares_table
-from moex_stock_data.moex_data_parser import Moex_data_parser
+from moex_stock.moex_data_parser import Moex_data_parser
 
 
 class Analyser:
