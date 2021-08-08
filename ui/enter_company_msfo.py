@@ -1,11 +1,16 @@
 import sys
 
-from PyQt6.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QApplication, QPushButton
+from PyQt6.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QApplication, QPushButton, QComboBox
 
 from database_tables.msfo_table import Msfo_table
 
 
 class Enter_Company_Msfo(QWidget):
+    __THOUSAND_RUBLES = 'тыс. ₽'
+    __MILLION_RUBLES = 'млн. ₽'
+    __BILLION_RUBLES = 'млрд. ₽'
+    __THOUSAND_DOLLARS = 'тыс. $'
+
     def __init__(self):
         super().__init__()
         ticker_label = QLabel('Тикер')
@@ -26,6 +31,7 @@ class Enter_Company_Msfo(QWidget):
         fcf_label = QLabel('FCF')
         dividend_label = QLabel('Дивиденды')
 
+        self.__currency_combobox = QComboBox()
         self.__ticker_line_edit = QLineEdit()
         self.__year_line_edit = QLineEdit()
         self.__current_assets_line_edit = QLineEdit()
@@ -46,21 +52,21 @@ class Enter_Company_Msfo(QWidget):
 
         self.__ticker_line_edit.setInputMask('>AAAAA')
         self.__year_line_edit.setInputMask('9999')
-        self.__current_assets_line_edit.setInputMask('99999999999999')
-        self.__non_current_assets_line_edit.setInputMask('99999999999999')
-        self.__assets_line_edit.setInputMask('99999999999999')
-        self.__equity_line_edit.setInputMask('#9999999999999')
-        self.__current_liabilities_line_edit.setInputMask('99999999999999')
-        self.__non_current_liabilities_line_edit.setInputMask('99999999999999')
-        self.__liabilities_line_edit.setInputMask('99999999999999')
-        self.__net_debt_line_edit.setInputMask('#9999999999999')
-        self.__interest_line_edit.setInputMask('#9999999999999')
-        self.__sales_line_edit.setInputMask('99999999999999')
-        self.__operating_income_line_edit.setInputMask('#9999999999999')
-        self.__net_income_line_edit.setInputMask('#9999999999999')
-        self.__ebitda_line_edit.setInputMask('99999999999999')
-        self.__fcf_line_edit.setInputMask('#9999999999999')
-        self.__dividend_line_edit.setInputMask('99999999999999')
+        self.__current_assets_line_edit.setInputMask('#999999999')
+        self.__non_current_assets_line_edit.setInputMask('#999999999')
+        self.__assets_line_edit.setInputMask('#999999999')
+        self.__equity_line_edit.setInputMask('#999999999')
+        self.__current_liabilities_line_edit.setInputMask('#999999999')
+        self.__non_current_liabilities_line_edit.setInputMask('#999999999')
+        self.__liabilities_line_edit.setInputMask('#999999999')
+        self.__net_debt_line_edit.setInputMask('#999999999')
+        self.__interest_line_edit.setInputMask('#999999999')
+        self.__sales_line_edit.setInputMask('999999999')
+        self.__operating_income_line_edit.setInputMask('#999999999')
+        self.__net_income_line_edit.setInputMask('#999999999')
+        self.__ebitda_line_edit.setInputMask('999999999')
+        self.__fcf_line_edit.setInputMask('#999999999')
+        self.__dividend_line_edit.setInputMask('999999999')
 
         ok_button = QPushButton('Сохранить')
         cancel_button = QPushButton('Отмена')
@@ -69,72 +75,106 @@ class Enter_Company_Msfo(QWidget):
         ok_button.clicked.connect(self.ok_button_clicked)
         cancel_button.clicked.connect(self.cancel_button_clicked)
 
+        self.__currency_combobox.addItem(self.__THOUSAND_RUBLES)
+        self.__currency_combobox.addItem(self.__MILLION_RUBLES)
+        self.__currency_combobox.addItem(self.__BILLION_RUBLES)
+        self.__currency_combobox.addItem(self.__THOUSAND_DOLLARS)
+
         layout = QGridLayout()
         layout.setSpacing(10)
         layout.addWidget(ticker_label, 0, 0)
         layout.addWidget(self.__ticker_line_edit, 0, 1)
         layout.addWidget(year_label, 1, 0)
         layout.addWidget(self.__year_line_edit, 1, 1)
+        layout.addWidget(self.__currency_combobox, 2, 1)
 
-        layout.addWidget(current_assets_label, 2, 0)
-        layout.addWidget(self.__current_assets_line_edit, 2, 1)
-        layout.addWidget(non_current_assets_label, 3, 0)
-        layout.addWidget(self.__non_current_assets_line_edit, 3, 1)
-        layout.addWidget(assets_label, 4, 0)
-        layout.addWidget(self.__assets_line_edit, 4, 1)
-        layout.addWidget(equity_label, 5, 0)
-        layout.addWidget(self.__equity_line_edit, 5, 1)
-        layout.addWidget(current_liabilities_label, 6, 0)
-        layout.addWidget(self.__current_liabilities_line_edit, 6, 1)
-        layout.addWidget(non_current_liabilities_label, 7, 0)
-        layout.addWidget(self.__non_current_liabilities_line_edit, 7, 1)
-        layout.addWidget(liabilities_label, 8, 0)
-        layout.addWidget(self.__liabilities_line_edit, 8, 1)
+        layout.addWidget(current_assets_label, 3, 0)
+        layout.addWidget(self.__current_assets_line_edit, 3, 1)
+        layout.addWidget(non_current_assets_label, 4, 0)
+        layout.addWidget(self.__non_current_assets_line_edit, 4, 1)
+        layout.addWidget(assets_label, 5, 0)
+        layout.addWidget(self.__assets_line_edit, 5, 1)
+        layout.addWidget(equity_label, 6, 0)
+        layout.addWidget(self.__equity_line_edit, 6, 1)
+        layout.addWidget(current_liabilities_label, 7, 0)
+        layout.addWidget(self.__current_liabilities_line_edit, 7, 1)
+        layout.addWidget(non_current_liabilities_label, 8, 0)
+        layout.addWidget(self.__non_current_liabilities_line_edit, 8, 1)
+        layout.addWidget(liabilities_label, 9, 0)
+        layout.addWidget(self.__liabilities_line_edit, 9, 1)
 
-        layout.addWidget(net_debt_label, 9, 0)
-        layout.addWidget(self.__net_debt_line_edit, 9, 1)
-        layout.addWidget(interest_label, 10, 0)
-        layout.addWidget(self.__interest_line_edit, 10, 1)
+        layout.addWidget(net_debt_label, 10, 0)
+        layout.addWidget(self.__net_debt_line_edit, 10, 1)
+        layout.addWidget(interest_label, 11, 0)
+        layout.addWidget(self.__interest_line_edit, 11, 1)
 
-        layout.addWidget(sales_label, 11, 0)
-        layout.addWidget(self.__sales_line_edit, 11, 1)
-        layout.addWidget(operating_income_label, 12, 0)
-        layout.addWidget(self.__operating_income_line_edit, 12, 1)
-        layout.addWidget(net_income_label, 13, 0)
-        layout.addWidget(self.__net_income_line_edit, 13, 1)
+        layout.addWidget(sales_label, 12, 0)
+        layout.addWidget(self.__sales_line_edit, 12, 1)
+        layout.addWidget(operating_income_label, 13, 0)
+        layout.addWidget(self.__operating_income_line_edit, 13, 1)
+        layout.addWidget(net_income_label, 14, 0)
+        layout.addWidget(self.__net_income_line_edit, 14, 1)
 
-        layout.addWidget(ebitda_label, 14, 0)
-        layout.addWidget(self.__ebitda_line_edit, 14, 1)
-        layout.addWidget(fcf_label, 15, 0)
-        layout.addWidget(self.__fcf_line_edit, 15, 1)
-        layout.addWidget(dividend_label, 16, 0)
-        layout.addWidget(self.__dividend_line_edit, 16, 1)
+        layout.addWidget(ebitda_label, 15, 0)
+        layout.addWidget(self.__ebitda_line_edit, 15, 1)
+        layout.addWidget(fcf_label, 16, 0)
+        layout.addWidget(self.__fcf_line_edit, 16, 1)
+        layout.addWidget(dividend_label, 17, 0)
+        layout.addWidget(self.__dividend_line_edit, 17, 1)
 
-        layout.addWidget(ok_button, 17, 0)
-        layout.addWidget(cancel_button, 17, 1)
+        layout.addWidget(ok_button, 18, 0)
+        layout.addWidget(cancel_button, 18, 1)
 
         self.setLayout(layout)
         self.show()
 
     def ok_button_clicked(self):
-        table = Msfo_table(self.__ticker_line_edit.text())
-        year = self.__year_line_edit.text()
+        currency = 1
+        if self.__currency_combobox.currentText() == self.__THOUSAND_RUBLES:
+            currency = 1000
+        elif self.__currency_combobox.currentText() == self.__MILLION_RUBLES:
+            currency = 1000000
+        elif self.__currency_combobox.currentText() == self.__BILLION_RUBLES:
+            currency = 1000000000
+        elif self.__currency_combobox.currentText() == self.__THOUSAND_DOLLARS:
+            currency = 1000 * 1
+
+        ticker = str(self.__ticker_line_edit.text())
+        year = int(self.__year_line_edit.text())
+        current_assets = int(self.__current_assets_line_edit.text()) * currency
+        non_current_assets = int(self.__non_current_assets_line_edit.text()) * currency
+        assets = int(self.__assets_line_edit.text()) * currency
+        equity = int(self.__equity_line_edit.text()) * currency
+        current_liabilities = int(self.__current_liabilities_line_edit.text()) * currency
+        non_current_liabilities = int(self.__non_current_liabilities_line_edit.text()) * currency
+        liabilities = int(self.__liabilities_line_edit.text()) * currency
+        interest = int(self.__interest_line_edit.text()) * currency
+        net_debt = int(self.__net_debt_line_edit.text()) * currency
+        sales = int(self.__sales_line_edit.text()) * currency
+        operating_income = int(self.__operating_income_line_edit.text()) * currency
+        net_income = int(self.__net_income_line_edit.text()) * currency
+        ebitda = int(self.__ebitda_line_edit.text()) * currency
+        fcf = int(self.__fcf_line_edit.text()) * currency
+        dividend = int(self.__dividend_line_edit.text()) * currency
+
+        table = Msfo_table(ticker)
         table.set_year(year)
-        table.set_current_assets(self.__current_assets_line_edit.text(), year)
-        table.set_non_current_assets(self.__non_current_assets_line_edit.text(), year)
-        table.set_assets(self.__assets_line_edit.text(), year)
-        table.set_equity(self.__equity_line_edit.text(), year)
-        table.set_current_liabilities(self.__current_liabilities_line_edit.text(), year)
-        table.set_non_current_liabilities(self.__non_current_liabilities_line_edit.text(), year)
-        table.set_liabilities(self.__liabilities_line_edit.text(), year)
-        table.set_interest(self.__interest_line_edit.text(), year)
-        table.set_net_debt(self.__net_debt_line_edit.text(), year)
-        table.set_sales(self.__sales_line_edit.text(), year)
-        table.set_operating_income(self.__operating_income_line_edit.text(), year)
-        table.set_net_income(self.__net_income_line_edit.text(), year)
-        table.set_ebitda(self.__ebitda_line_edit.text(), year)
-        table.set_fcf(self.__fcf_line_edit.text(), year)
-        table.set_dividend(self.__dividend_line_edit.text(), year)
+        table.set_current_assets(current_assets, year)
+        table.set_non_current_assets(non_current_assets, year)
+        table.set_assets(assets, year)
+        table.set_equity(equity, year)
+        table.set_current_liabilities(current_liabilities, year)
+        table.set_non_current_liabilities(non_current_liabilities, year)
+        table.set_liabilities(liabilities, year)
+        table.set_interest(interest, year)
+        table.set_net_debt(net_debt, year)
+        table.set_sales(sales, year)
+        table.set_operating_income(operating_income, year)
+        table.set_net_income(net_income, year)
+        table.set_ebitda(ebitda, year)
+        table.set_fcf(fcf, year)
+        table.set_dividend(dividend, year)
+        self.close()
 
     def cancel_button_clicked(self):
         self.close()

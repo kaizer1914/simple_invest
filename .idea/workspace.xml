@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="К форме сохранения данных по МСФО добавлены кнопки и обработчики этих кнопок">
-      <change beforePath="$PROJECT_DIR$/.idea/rus_invest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rus_invest.iml" afterDir="false" />
+    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="Устранено дублирование имен файлов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/analyser.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/analyser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/multiplier.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/multiplier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock_data/check_security.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/check_security.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock_data/moex_data_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/moex_data_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock_data/moex_stock_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/moex_stock_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database_tables/msfo_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/database_tables/msfo_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/enter_company_msfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/enter_company_msfo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +34,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="format.on.save" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="optimize.imports.on.save" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="enter_company_msfo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -107,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628278154742</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Устранено дублирование имен файлов">
+      <created>1628341603825</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1628341603825</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,6 +186,100 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Revert &quot;Revert &quot;first commit&quot;&quot;&#10;&#10;This reverts commit 8b86de3d1c44e833cbb35c180fe0bf94163fc2f3." />
     <MESSAGE value="К форме сохранения данных по МСФО добавлены кнопки и обработчики этих кнопок" />
-    <option name="LAST_COMMIT_MESSAGE" value="К форме сохранения данных по МСФО добавлены кнопки и обработчики этих кнопок" />
+    <MESSAGE value="Устранено дублирование имен файлов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Устранено дублирование имен файлов" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>160</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>161</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>162</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>163</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>165</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>164</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>166</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>168</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>170</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>169</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>171</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>172</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>173</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>174</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/enter_company_msfo.py</url>
+          <line>175</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

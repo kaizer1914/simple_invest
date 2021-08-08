@@ -13,25 +13,25 @@ class Msfo_table:
             cursor = connection.cursor()
             cursor.execute(F"""
             CREATE TABLE IF NOT EXISTS {sec_id}
-            (year INT2 PRIMARY KEY, 
-            current_assets INT8,
-            non_current_assets INT8,
-            assets INT8,
-            equity INT8,
-            current_liabilities INT8,
-            non_current_liabilities INT8,
-            liabilities INT8,
+            (year SMALLINT PRIMARY KEY, 
+            current_assets BIGINT,
+            non_current_assets BIGINT,
+            assets BIGINT,
+            equity BIGINT,
+            current_liabilities BIGINT,
+            non_current_liabilities BIGINT,
+            liabilities BIGINT,
             
-            net_debt INT8,
-            interest INT8,
+            net_debt BIGINT,
+            interest BIGINT,
             
-            sales INT8,
-            operating_income INT8,
-            net_income INT8,
+            sales BIGINT,
+            operating_income BIGINT,
+            net_income BIGINT,
             
-            ebitda INT8,
-            fcf INT8,
-            dividend INT8
+            ebitda BIGINT,
+            fcf BIGINT,
+            dividend BIGINT
             );
             """)
             connection.commit()
