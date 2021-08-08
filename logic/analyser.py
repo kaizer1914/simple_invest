@@ -1,10 +1,9 @@
-from vtb_position_report import Vtb_position_report
-
-from database_tables.bonds_table import Bonds_table
-from database_tables.etf_table import Etf_table
-from database_tables.securities_table import Securities_table
-from database_tables.shares_table import Shares_table
 from moex_stock.moex_data_parser import Moex_data_parser
+from tables.bonds_table import Bonds_table
+from tables.etf_table import Etf_table
+from tables.securities_table import Securities_table
+from tables.shares_table import Shares_table
+from vtb_position_report import Vtb_position_report
 
 
 class Analyser:

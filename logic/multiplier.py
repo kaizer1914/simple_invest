@@ -1,5 +1,5 @@
-from database_tables.msfo_table import Msfo_table
 from moex_stock.moex_data_parser import Moex_data_parser
+from tables.msfo_table import Msfo_table
 
 
 class Multiplier:

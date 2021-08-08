@@ -1,6 +1,7 @@
 # Загружаем и парсим отчет по позциям из втб на любую дату, сохраняем результат в БД
 import csv
-from database_tables.securities_table import Securities_table
+
+from tables.securities_table import Securities_table
 
 
 class Vtb_position_report:

@@ -1,4 +1,4 @@
-from moex_stock_data.moex_stock_data import Moex_stock_data
+from moex_stock.moex_stock_data import Moex_stock_data
 
 
 class Moex_data_parser:

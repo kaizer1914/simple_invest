@@ -1,6 +1,6 @@
 import psycopg2
 
-from database_tables.database_config import Database_config
+from tables.database_config import Database_config
 
 
 class Bonds_table:

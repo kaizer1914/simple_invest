@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from moex_stock_data.check_security import Check_security
+from moex_stock.check_security import Check_security
 
 
 class Moex_stock_data:
