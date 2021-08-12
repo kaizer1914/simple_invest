@@ -47,9 +47,9 @@ class SalesChart(QWidget):
         return series
 
     def __create_axis_x(self):
-        axisX = QBarCategoryAxis()
-        axisX.append(self.__table.get_all_years())
-        return axisX
+        axis_x = QBarCategoryAxis()
+        axis_x.append(self.__table.get_all_years())
+        return axis_x
 
     def __create_axis_y(self):
         min_max = list()
@@ -57,11 +57,11 @@ class SalesChart(QWidget):
             min_max.append(self.__table.get_sales(year) / self.__currency_combobox.CURRENCY)
         min_max.sort()
 
-        axisY = QValueAxis()
-        axisY.setRange(min_max[0], min_max[-1])
-        axisY.applyNiceNumbers()
-        axisY.setLabelFormat('%.0f')
-        return axisY
+        axis_y = QValueAxis()
+        axis_y.setRange(min_max[0], min_max[-1])
+        axis_y.applyNiceNumbers()
+        axis_y.setLabelFormat('%.0f')
+        return axis_y
 
     def __on_change_event(self, text):
         if text == self.__currency_combobox.THOUSAND_RUBLES:
