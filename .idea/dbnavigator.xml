@@ -27,7 +27,7 @@
     <loaded-nodes>
       <connection connection-id="7da23786-4dc8-4cd4-80b6-65d35c3e797f">
         <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, sequence, function, index" />
+        <schema name="public" object-types="table, view, function" />
       </connection>
     </loaded-nodes>
   </component>

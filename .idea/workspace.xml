@@ -4,16 +4,12 @@
     <option name="SPLITTER_PROPORTION" value="0.43822843" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="Отказ от табличного вида в пользу диаграмм">
-      <change afterPath="$PROJECT_DIR$/widgets/currency_combobox.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/widgets/sales_chart.py" afterDir="false" />
+    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="Исправлены ошибки изменения единиц измерения при сохранении данных МСФО и загрузки диаграммы выручки">
+      <change afterPath="$PROJECT_DIR$/widgets/ebitda_chart.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/widgets/income_chart.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock/moex_data_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/moex_data_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock/moex_stock_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/moex_stock_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/company_table_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/example_table.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/company_widget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/enter_company_data_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/input_company_msfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/sales_chart.py" beforeDir="false" afterPath="$PROJECT_DIR$/widgets/sales_chart.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +54,70 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.17216118" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.income_chart">
+    <configuration name="ebitda_chart" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="rus_invest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/widgets" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/widgets/ebitda_chart.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="income_chart" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="rus_invest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/widgets" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/widgets/income_chart.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="input_company_msfo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="rus_invest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/widgets" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/widgets/input_company_msfo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="sales_chart" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="rus_invest" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -82,7 +141,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.income_chart" />
         <item itemvalue="Python.sales_chart" />
+        <item itemvalue="Python.ebitda_chart" />
+        <item itemvalue="Python.input_company_msfo" />
       </list>
     </recent_temporary>
   </component>
@@ -144,7 +206,28 @@
       <option name="project" value="LOCAL" />
       <updated>1628621728576</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Создана столбчатая диаграмма выручки">
+      <created>1628791977373</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1628791977373</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Исправлены имена переменных">
+      <created>1628792071538</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1628792071538</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Исправлены ошибки изменения единиц измерения при сохранении данных МСФО и загрузки диаграммы выручки">
+      <created>1628796772036</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1628796772036</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,10 +304,21 @@
     <MESSAGE value="Устранено дублирование имен файлов" />
     <MESSAGE value="Настроены маски ввода для данных МСФО" />
     <MESSAGE value="Отказ от табличного вида в пользу диаграмм" />
-    <option name="LAST_COMMIT_MESSAGE" value="Отказ от табличного вида в пользу диаграмм" />
+    <MESSAGE value="C" />
+    <MESSAGE value="Создана столбчатая диаграмма выручки" />
+    <MESSAGE value="Исправлены имена переменных" />
+    <MESSAGE value="Исправлены ошибки изменения единиц измерения при сохранении данных МСФО и загрузки диаграммы выручки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправлены ошибки изменения единиц измерения при сохранении данных МСФО и загрузки диаграммы выручки" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/widgets/input_company_msfo.py</url>
+          <line>159</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

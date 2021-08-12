@@ -8,9 +8,9 @@ from tables.msfo_table import Msfo_table
 from widgets.currency_combobox import CurrencyComboBox
 
 
-class SalesChart(QWidget):
+class IncomeChart(QWidget):
     def __init__(self, ticker):
-        super(SalesChart, self).__init__()
+        super(IncomeChart, self).__init__()
         self.__table = Msfo_table(ticker)
         self.currency_combobox = CurrencyComboBox()
         self.currency_combobox.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
@@ -36,16 +36,26 @@ class SalesChart(QWidget):
         self.__chart_view.setChart(chart)
 
     def __create_series(self):
-        self.__sales = list()
-        for year in self.__table.get_all_years():
-            self.__sales.append(self.__table.get_sales(year) / self.currency_combobox.get_currency())
+        self.__operating_income = list()
+        self.__net_income = list()
 
-        sales_set = QBarSet('Выручка')
-        sales_set.hovered.connect(self.on_hovered)
-        sales_set.append(self.__sales)
+        for year in self.__table.get_all_years():
+            self.__operating_income.append(
+                self.__table.get_operating_income(year) / self.currency_combobox.get_currency())
+            self.__net_income.append(self.__table.get_net_income(year) / self.currency_combobox.get_currency())
+
+        operating_income_set = QBarSet('Операционная прибыль')
+        net_income_set = QBarSet('Чистая прибыль')
+
+        operating_income_set.append(self.__operating_income)
+        net_income_set.append(self.__net_income)
+
+        operating_income_set.hovered.connect(self.on_hovered)
+        net_income_set.hovered.connect(self.on_hovered)
 
         series = QBarSeries()
-        series.append(sales_set)
+        series.append(operating_income_set)
+        series.append(net_income_set)
         return series
 
     def __create_axis_x(self):
@@ -57,17 +67,21 @@ class SalesChart(QWidget):
     def __create_axis_y(self):
         max = list()
         for year in self.__table.get_all_years():
-            max.append(self.__table.get_sales(year) / self.currency_combobox.get_currency())
+            max.append(self.__table.get_operating_income(year) / self.currency_combobox.get_currency())
+            max.append(self.__table.get_net_income(year) / self.currency_combobox.get_currency())
         max.sort()
 
         axis_y = QValueAxis()
         axis_y.setMax(max[-1])
+        # axis_y.applyNiceNumbers()
         axis_y.setLabelFormat('%.0f')
         return axis_y
 
     def on_hovered(self, status, index):
         if status:
-            tooltip = str(int(self.__sales[index]))
+            tooltip1 = "Операционная: " + str(int(self.__operating_income[index]))
+            tooltip2 = "Чистая: " + str(int(self.__net_income[index]))
+            tooltip = tooltip1 + '\n' + tooltip2
             self.__chart_view.setToolTip(tooltip)
 
     # переопределен метод currency combo box
@@ -78,5 +92,5 @@ class SalesChart(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    widget = SalesChart('AKRN')
+    widget = IncomeChart('AKRN')
     sys.exit(app.exec())

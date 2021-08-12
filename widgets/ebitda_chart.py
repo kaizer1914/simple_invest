@@ -8,13 +8,13 @@ from tables.msfo_table import Msfo_table
 from widgets.currency_combobox import CurrencyComboBox
 
 
-class SalesChart(QWidget):
+class EbitdaChart(QWidget):
     def __init__(self, ticker):
-        super(SalesChart, self).__init__()
+        super(EbitdaChart, self).__init__()
         self.__table = Msfo_table(ticker)
         self.currency_combobox = CurrencyComboBox()
         self.currency_combobox.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        self.currency_combobox.currentTextChanged.connect(self.__on_change_event)
+        self.currency_combobox.currentTextChanged.connect(self.on_change_event)
 
         self.__chart_view = QChartView()
         self.__create_chart()
@@ -36,16 +36,16 @@ class SalesChart(QWidget):
         self.__chart_view.setChart(chart)
 
     def __create_series(self):
-        self.__sales = list()
+        self.__ebitda = list()
         for year in self.__table.get_all_years():
-            self.__sales.append(self.__table.get_sales(year) / self.currency_combobox.get_currency())
+            self.__ebitda.append(self.__table.get_ebitda(year) / self.currency_combobox.get_currency())
 
-        sales_set = QBarSet('Выручка')
-        sales_set.hovered.connect(self.on_hovered)
-        sales_set.append(self.__sales)
+        ebitda_set = QBarSet('EBITDA')
+        ebitda_set.hovered.connect(self.on_hovered)
+        ebitda_set.append(self.__ebitda)
 
         series = QBarSeries()
-        series.append(sales_set)
+        series.append(ebitda_set)
         return series
 
     def __create_axis_x(self):
@@ -57,7 +57,7 @@ class SalesChart(QWidget):
     def __create_axis_y(self):
         max = list()
         for year in self.__table.get_all_years():
-            max.append(self.__table.get_sales(year) / self.currency_combobox.get_currency())
+            max.append(self.__table.get_ebitda(year) / self.currency_combobox.get_currency())
         max.sort()
 
         axis_y = QValueAxis()
@@ -67,16 +67,16 @@ class SalesChart(QWidget):
 
     def on_hovered(self, status, index):
         if status:
-            tooltip = str(int(self.__sales[index]))
+            tooltip = str(int(self.__ebitda[index]))
             self.__chart_view.setToolTip(tooltip)
 
     # переопределен метод currency combo box
-    def __on_change_event(self, text):
+    def on_change_event(self, text):
         self.currency_combobox.on_change_click(text)
         self.__create_chart()
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    widget = SalesChart('AKRN')
+    widget = EbitdaChart('AKRN')
     sys.exit(app.exec())
