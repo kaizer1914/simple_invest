@@ -36,7 +36,7 @@ class SalesChart(QWidget):
     def __create_series(self):
         sales = list()
         for year in self.__table.get_all_years():
-            sales_year = self.__table.get_sales(year) / self.__currency_combobox.CURRENCY
+            sales_year = self.__table.get_sales(year) / self.__currency_combobox.get_currency()
             sales.append(sales_year)
 
         sales_set = QBarSet('Выручка')
@@ -54,7 +54,7 @@ class SalesChart(QWidget):
     def __create_axis_y(self):
         min_max = list()
         for year in self.__table.get_all_years():
-            min_max.append(self.__table.get_sales(year) / self.__currency_combobox.CURRENCY)
+            min_max.append(self.__table.get_sales(year) / self.__currency_combobox.get_currency())
         min_max.sort()
 
         axis_y = QValueAxis()
@@ -63,15 +63,9 @@ class SalesChart(QWidget):
         axis_y.setLabelFormat('%.0f')
         return axis_y
 
+    # переопределен метод currency combo box
     def __on_change_event(self, text):
-        if text == self.__currency_combobox.THOUSAND_RUBLES:
-            self.__currency_combobox.CURRENCY = 1000
-        elif text == self.__currency_combobox.MILLION_RUBLES:
-            self.__currency_combobox.CURRENCY = 1000000
-        elif text == self.__currency_combobox.BILLION_RUBLES:
-            self.__currency_combobox.CURRENCY = 1000000000
-        elif text == self.__currency_combobox.THOUSAND_DOLLARS:
-            self.__currency_combobox.CURRENCY = 1000 * 1  # курс доллара
+        self.__currency_combobox.on_change_click(text)
         self.__create_chart()
 
 

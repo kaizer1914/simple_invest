@@ -7,11 +7,6 @@ from widgets.currency_combobox import CurrencyComboBox
 
 
 class InputCompanyMSFO(QWidget):
-    # __THOUSAND_RUBLES = 'тыс. ₽'
-    # __MILLION_RUBLES = 'млн. ₽'
-    # __BILLION_RUBLES = 'млрд. ₽'
-    # __THOUSAND_DOLLARS = 'тыс. $'
-
     def __init__(self):
         super().__init__()
         ticker_label = QLabel('Тикер')
@@ -76,11 +71,6 @@ class InputCompanyMSFO(QWidget):
         ok_button.clicked.connect(self.ok_button_clicked)
         cancel_button.clicked.connect(self.cancel_button_clicked)
 
-        # self.__currency_combobox.addItem(self.__THOUSAND_RUBLES)
-        # self.__currency_combobox.addItem(self.__MILLION_RUBLES)
-        # self.__currency_combobox.addItem(self.__BILLION_RUBLES)
-        # self.__currency_combobox.addItem(self.__THOUSAND_DOLLARS)
-
         layout = QGridLayout()
         layout.setSpacing(10)
         layout.addWidget(ticker_label, 0, 0)
@@ -130,17 +120,8 @@ class InputCompanyMSFO(QWidget):
         self.show()
 
     def ok_button_clicked(self):
-        # currency = 1
-        # if self.__currency_combobox.currentText() == self.__THOUSAND_RUBLES:
-        #     currency = 1000
-        # elif self.__currency_combobox.currentText() == self.__MILLION_RUBLES:
-        #     currency = 1000000
-        # elif self.__currency_combobox.currentText() == self.__BILLION_RUBLES:
-        #     currency = 1000000000
-        # elif self.__currency_combobox.currentText() == self.__THOUSAND_DOLLARS:
-        #     currency = 1000 * 1
-        currency = self.__currency_combobox.CURRENCY
-
+        currency = self.__currency_combobox.get_currency()
+        
         ticker = str(self.__ticker_line_edit.text())
         year = int(self.__year_line_edit.text())
         current_assets = int(self.__current_assets_line_edit.text()) * currency

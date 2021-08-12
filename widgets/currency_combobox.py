@@ -6,7 +6,6 @@ class CurrencyComboBox(QComboBox):
     MILLION_RUBLES = 'млн. ₽'
     BILLION_RUBLES = 'млрд. ₽'
     THOUSAND_DOLLARS = 'тыс. $'
-    CURRENCY = 1000
 
     def __init__(self):
         super(CurrencyComboBox, self).__init__()
@@ -14,12 +13,18 @@ class CurrencyComboBox(QComboBox):
         self.addItem(self.MILLION_RUBLES)
         self.addItem(self.BILLION_RUBLES)
         self.addItem(self.THOUSAND_DOLLARS)
+        self.__currency = 1000
+        self.currentTextChanged.connect(self.on_change_click)
 
-        if self.currentText() == self.THOUSAND_RUBLES:
-            self.CURRENCY = 1000
-        elif self.currentText() == self.MILLION_RUBLES:
-            self.CURRENCY = 1000000
-        elif self.currentText() == self.BILLION_RUBLES:
-            self.CURRENCY = 1000000000
-        elif self.currentText() == self.THOUSAND_DOLLARS:
-            self.CURRENCY = 1000 * 1  # курс доллара
+    def get_currency(self):
+        return self.__currency
+
+    def on_change_click(self, text):
+        if text == self.THOUSAND_RUBLES:
+            self.__currency = 1000
+        elif text == self.MILLION_RUBLES:
+            self.__currency = 1000000
+        elif text == self.BILLION_RUBLES:
+            self.__currency = 1000000000
+        elif text == self.THOUSAND_DOLLARS:
+            self.__currency = 1000 * 74  # курс доллара
