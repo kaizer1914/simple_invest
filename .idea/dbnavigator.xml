@@ -24,16 +24,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="false" />
-    <loaded-nodes>
-      <connection connection-id="7da23786-4dc8-4cd4-80b6-65d35c3e797f">
-        <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, function" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="7da23786-4dc8-4cd4-80b6-65d35c3e797f">
-      <console name="invest" type="STANDARD" schema="public" session="Main"><![CDATA[select * from akrn;]]></console>
+      <console name="invest" type="STANDARD" schema="public" session="Main"><![CDATA[select * from position_report;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -41,6 +36,11 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="7da23786-4dc8-4cd4-80b6-65d35c3e797f" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="7da23786-4dc8-4cd4-80b6-65d35c3e797f" dataset="public.position_report" active-filter-id="" />
+    <filter-actions connection-id="7da23786-4dc8-4cd4-80b6-65d35c3e797f" dataset="public.position_report_table" active-filter-id="" />
+    <filter-actions connection-id="7da23786-4dc8-4cd4-80b6-65d35c3e797f" dataset="public.bonds" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

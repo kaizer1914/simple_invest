@@ -2,7 +2,7 @@ import sys
 
 from PyQt6.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QApplication, QPushButton
 
-from tables.msfo_table import Msfo_table
+from tables.msfo_table import MsfoTable
 from widgets.currency_combobox import CurrencyComboBox
 
 
@@ -121,7 +121,7 @@ class InputCompanyMSFO(QWidget):
 
     def ok_button_clicked(self):
         currency = self.__currency_combobox.get_currency()
-        
+
         ticker = str(self.__ticker_line_edit.text())
         year = int(self.__year_line_edit.text())
         current_assets = int(self.__current_assets_line_edit.text()) * currency
@@ -140,7 +140,7 @@ class InputCompanyMSFO(QWidget):
         fcf = int(self.__fcf_line_edit.text()) * currency
         dividend = int(self.__dividend_line_edit.text()) * currency
 
-        table = Msfo_table(ticker)
+        table = MsfoTable(ticker)
         table.set_year(year)
         table.set_current_assets(current_assets, year)
         table.set_non_current_assets(non_current_assets, year)

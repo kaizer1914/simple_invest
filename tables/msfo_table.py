@@ -3,7 +3,7 @@ import psycopg2
 from tables.database_config import Database_config
 
 
-class Msfo_table:
+class MsfoTable:
     __SECURITIES_TABLE = 'securities'
     __SHARES_TABLE = 'shares'
 

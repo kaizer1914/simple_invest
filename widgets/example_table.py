@@ -2,13 +2,13 @@ import sys
 
 from PyQt6.QtWidgets import QWidget, QApplication, QTableWidget, QTableWidgetItem, QVBoxLayout
 
-from tables.msfo_table import Msfo_table
+from tables.msfo_table import MsfoTable
 
 
 class ExampleTable(QWidget):
     def __init__(self, ticker):
         super(ExampleTable, self).__init__()
-        table = Msfo_table(ticker)
+        table = MsfoTable(ticker)
         layout = QVBoxLayout()
 
         table_widget = QTableWidget(1, table.get_count_years())
