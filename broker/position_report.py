@@ -30,7 +30,7 @@ class PositionReport:
 
         result_data.index = result_data['textBox14']  # Назначаем колонку с тикером в качествет идентификатора
         result_data.index.name = 'ticker'  # Назначаем имя колонки идентификатора
-        result_data = result_data.drop(['textBox14'], axis=1)  # Удаляем уже ненужную колонку с тикером
+        result_data = result_data.drop(['textBox14'], axis='columns')  # Удаляем уже ненужную колонку с тикером
 
         ''' Переименовываем колонки '''
         result_data = result_data.rename(columns={'textBox1': 'name',

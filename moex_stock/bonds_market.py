@@ -7,10 +7,10 @@ from sqlalchemy import create_engine
 # https://iss.moex.com/iss/engines/stock/markets/bonds.xml?iss.meta=off  - справка по рынкам облигаций
 class BondsMarket:
     def __init__(self):
-        self.engine = create_engine('postgresql://kirill@localhost:5432/invest')
+        self.engine = create_engine('postgresql://kirill@localhost/invest')
         self.table = 'bonds_market'
 
-    def save_stock_data(self) -> DataFrame:
+    def update_stock_data(self) -> DataFrame:
         url = 'https://iss.moex.com/iss/engines/stock/markets/bonds/securities.json?iss.meta=off'
 
         response_data = pandas.read_json(url)
@@ -69,11 +69,11 @@ class BondsMarket:
         securities_data.to_sql(self.table, self.engine, if_exists='replace')  # Сохраняем в БД
         return securities_data
 
-    def load_stock_data(self) -> DataFrame:
+    def get_stock_data(self) -> DataFrame:
         data = pandas.read_sql_table(self.table, self.engine)
         return data
 
 
 if __name__ == '__main__':
     bonds = BondsMarket()
-    print(bonds.save_stock_data())
+    print(bonds.update_stock_data())
