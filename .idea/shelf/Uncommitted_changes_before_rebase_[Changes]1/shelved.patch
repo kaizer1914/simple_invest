@@ -1,0 +1,20 @@
+Index: streamlit/main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/streamlit/main.py b/streamlit/main.py
+new file mode 100644
+--- /dev/null	(date 1635965094364)
++++ b/streamlit/main.py	(date 1635965094364)
+@@ -0,0 +1,10 @@
++import streamlit
++
++from vtb.position_report import PositionReport
++
++position_report = PositionReport()
++upload = streamlit.file_uploader('Upload')
++if upload is not None:
++    data = position_report.save_to_db(upload.getvalue())
++    streamlit.write(data)
++

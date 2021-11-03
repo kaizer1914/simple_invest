@@ -63,18 +63,18 @@ class PositionReport:
         data = data.merge(shares_market_data, how='inner', left_on='ticker', right_on='ticker')
         return data
 
-    def merge_bonds_data(self):
-        bonds_market_data = BondsMarket().update_stock_data()
-        data = self.load_from_db()
-        data = data.merge(bonds_market_data, how='inner', left_on='ticker', right_on='ticker')
-        return data
-
     def get_shares_data(self) -> DataFrame:
         data = self.merge_shares_data()
         data['income'] = (data['price'] - data['buy_price']) / data['buy_price']
         data['sum'] = data['price'] * data['count']
         '''Убираем лишние столбцы'''
         data = data[['longname', 'ticker', 'price', 'count', 'sum', 'income']]
+        return data
+
+    def merge_bonds_data(self):
+        bonds_market_data = BondsMarket().update_stock_data()
+        data = self.load_from_db()
+        data = data.merge(bonds_market_data, how='inner', left_on='ticker', right_on='ticker')
         return data
 
     def get_bonds_data(self) -> DataFrame:

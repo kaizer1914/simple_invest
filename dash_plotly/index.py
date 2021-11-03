@@ -1,10 +1,11 @@
 from dash import html, Output, Input
 from dash.dcc import Location, Link
+from dash_bootstrap_components import Container
 
 from dash_plotly import all_shares, position
 from dash_plotly.application import app
 
-app.layout = html.Div([
+app.layout = Container([
     Location(id='url', refresh=False),
     html.Div(id='page-content')
 ])
