@@ -7,19 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="Переделано под библиотеку pandas">
-      <change afterPath="$PROJECT_DIR$/dash_plotly/all_shares.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dash_plotly/application.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dash_plotly/index.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dash_plotly/position.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dash_plotly/yahoo_example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broker/position_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/vtb/position_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock/bonds_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/bonds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock/shares_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/shares_funds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/currency_combobox.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/example_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/input_company_msfo.py" beforeDir="false" />
+    <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="Dash от Plotly">
+      <change beforePath="$PROJECT_DIR$/streamlit/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/streamlit/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +23,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dash_plotly" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -293,7 +287,21 @@
       <option name="project" value="LOCAL" />
       <updated>1635963828455</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Dasg от Plotly">
+      <created>1635963846456</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1635963846456</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Dash от Plotly">
+      <created>1635964032528</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1635964032528</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -388,7 +396,9 @@
     <MESSAGE value="Lj," />
     <MESSAGE value="Добавлена диаграмма ebitda.&#10;Исправлена ошибка отображения значения шкалы У" />
     <MESSAGE value="Переделано под библиотеку pandas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Переделано под библиотеку pandas" />
+    <MESSAGE value="Dasg от Plotly" />
+    <MESSAGE value="Dash от Plotly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dash от Plotly" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
