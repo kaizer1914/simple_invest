@@ -29,10 +29,14 @@ class SharesMarket:
         small_index = securities_data[securities_data['BOARDID'] == 'SMAL'].index.values  # Неполные лоты (акции)
         speq_index = securities_data[securities_data['BOARDID'] == 'SPEQ'].index.values  # Поставка по СК (акции)
         tqdp_index = securities_data[securities_data['BOARDID'] == 'TQDP'].index.values  # Крупные пакеты - Акции
+        currency_usd_index = securities_data[securities_data['CURRENCYID'] == 'USD'].index.values  # В долларах
+        currency_eur_index = securities_data[securities_data['CURRENCYID'] == 'EUR'].index.values  # В евро
 
         securities_data = securities_data.drop(index=small_index)
         securities_data = securities_data.drop(index=speq_index)
         securities_data = securities_data.drop(index=tqdp_index)
+        securities_data = securities_data.drop(index=currency_usd_index)
+        securities_data = securities_data.drop(index=currency_eur_index)
 
         null_price_index = securities_data[securities_data['LAST'] == 0].index.values
         securities_data = securities_data.drop(index=null_price_index)
@@ -65,8 +69,3 @@ class SharesMarket:
     def get_stock_data(self) -> DataFrame:
         data = pandas.read_sql_table(self.table, self.engine)
         return data
-
-
-if __name__ == '__main__':
-    shares = SharesMarket()
-    shares.update_stock_data()

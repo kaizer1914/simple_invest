@@ -72,8 +72,3 @@ class BondsMarket:
     def get_stock_data(self) -> DataFrame:
         data = pandas.read_sql_table(self.table, self.engine)
         return data
-
-
-if __name__ == '__main__':
-    bonds = BondsMarket()
-    print(bonds.update_stock_data())

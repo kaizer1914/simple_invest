@@ -3,15 +3,22 @@
   <component name="AnalysisUIOptions">
     <option name="SPLITTER_PROPORTION" value="0.43822843" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e5f8d397-c9bb-483b-8a50-aa6d43119ab3" name="Changes" comment="Переделано под библиотеку pandas">
+      <change afterPath="$PROJECT_DIR$/dash_plotly/all_shares.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dash_plotly/application.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dash_plotly/index.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dash_plotly/position.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dash_plotly/yahoo_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/streamlit/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broker/position_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/broker/position_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock/bonds_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/bonds_market.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moex_stock/shares_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/shares_market.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tables/database_config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tables/msfo_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/widgets/currency_combobox.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/broker/position_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/vtb/position_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moex_stock/bonds_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/bonds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moex_stock/shares_market.py" beforeDir="false" afterPath="$PROJECT_DIR$/moex_stock/shares_funds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/widgets/currency_combobox.py" beforeDir="false" afterPath="$PROJECT_DIR$/streamlit/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/widgets/example_table.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/widgets/input_company_msfo.py" beforeDir="false" />
     </list>
@@ -38,6 +45,12 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="2" />
   </component>
@@ -53,15 +66,22 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="format.on.save" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="optimize.imports.on.save" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.17216118" />
   </component>
-  <component name="RunManager" selected="Python.position_report">
-    <configuration name="pdf_reader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/streamlit" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="index" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="rus_invest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -69,11 +89,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tables" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pages" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tables/pdf_reader.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pages/index.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="rus_invest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/streamlit" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/streamlit/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -103,10 +144,39 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="yahoo_example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="rus_invest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pages" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pages/yahoo_example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.index" />
+      <item itemvalue="Python.position_report" />
+      <item itemvalue="Python.yahoo_example" />
+      <item itemvalue="Python.main" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.index" />
+        <item itemvalue="Python.yahoo_example" />
         <item itemvalue="Python.position_report" />
-        <item itemvalue="Python.pdf_reader" />
       </list>
     </recent_temporary>
   </component>
@@ -203,7 +273,21 @@
       <option name="project" value="LOCAL" />
       <updated>1631023802792</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Переделано под библиотеку pandas">
+      <created>1633190635411</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1633190635411</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Переделано под библиотеку pandas">
+      <created>1633190859920</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1633190859920</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
