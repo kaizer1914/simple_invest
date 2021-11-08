@@ -3,19 +3,17 @@ from io import StringIO
 
 import pandas
 from pandas import DataFrame
-from sqlalchemy import create_engine
 
 from moex_stock.bonds import BondsMarket
-from moex_stock.shares_funds import SharesMarket
+from moex_stock.shares import SharesMarket
 
 
 class PositionReport:
-    def __init__(self):
-        self.engine = create_engine('postgresql://kirill@localhost:5432/invest')
-        self.table = 'position_report'
+    def __init__(self, file: str):
+        self.file = file
 
-    def save_to_db(self, file: str):
-        content_type, content_string = file.split(',')
+    def get_from_file(self) -> DataFrame:
+        content_type, content_string = self.file.split(',')
         decoded_str = b64decode(content_string)
         load_data = pandas.read_csv(StringIO(decoded_str.decode('utf-8')))
 
@@ -34,53 +32,69 @@ class PositionReport:
                                                                     regex=True)  # Убираем пробелы в столбце count
         load_data[['textBox22']] = load_data[['textBox22']].astype(int)  # Назначаем тип данных
 
-        result_data = DataFrame()
+        position_df = DataFrame()
         for ticker in load_data['textBox14'].unique():  # Выделяем строки с уникальными тикерами
             series = load_data[load_data['textBox14'].isin([ticker])].tail(1)  # По указанному тикеру берём последнюю
             # строчку из датафрейма
-            result_data = result_data.append(series, ignore_index=True)  # Добавляем строку в новый датафрейм
+            position_df = position_df.append(series, ignore_index=True)  # Добавляем строку в новый датафрейм
 
-        result_data.index = result_data['textBox14']  # Назначаем колонку с тикером в качествет идентификатора
-        result_data.index.name = 'ticker'  # Назначаем имя колонки идентификатора
-        result_data = result_data.drop(['textBox14'], axis='columns')  # Удаляем уже ненужную колонку с тикером
+        # position_df.index = position_df['textBox14']  # Назначаем колонку с тикером в качествет идентификатора
+        # position_df.index.name = 'ticker'  # Назначаем имя колонки идентификатора
+        # position_df = position_df.drop(['textBox14'], axis='columns')  # Удаляем уже ненужную колонку с тикером
 
         ''' Переименовываем колонки '''
-        result_data = result_data.rename(columns={'textBox1': 'name',
+        position_df = position_df.rename(columns={'textBox1': 'position_name',
                                                   'textBox2': 'date',
                                                   'textBox11': 'buy_price',
                                                   'textBox22': 'count',
+                                                  'textBox14': 'ticker',
                                                   'textBox8': 'commission'})
-        result_data.to_sql(self.table, self.engine, if_exists='replace')
+        return position_df
 
-    def load_from_db(self) -> DataFrame:
-        data = pandas.read_sql_table(self.table, self.engine)
-        return data
-
-    def merge_shares_data(self):
-        shares_market_data = SharesMarket().update_stock_data()
-        data = self.load_from_db()
+    def get_shares_report(self, columns: list = None) -> DataFrame:
+        shares_market_df = SharesMarket.update_stock_data()
         ''' Результат слияния датасета брокерского отчета с рынком акций биржи'''
-        data = data.merge(shares_market_data, how='inner', left_on='ticker', right_on='ticker')
-        return data
+        df = self.get_from_file().merge(shares_market_df, how='inner', left_on='ticker', right_on='ticker')
+        df = df.rename(columns={'longname': 'name'})
 
-    def get_shares_data(self) -> DataFrame:
-        data = self.merge_shares_data()
-        data['income'] = (data['price'] - data['buy_price']) / data['buy_price']
-        data['sum'] = data['price'] * data['count']
-        '''Убираем лишние столбцы'''
-        data = data[['longname', 'ticker', 'price', 'count', 'sum', 'income']]
-        return data
+        df['income'] = round((df['current_price'] - df['buy_price']) / df['buy_price'] * 100, 2)
+        df['buy_sum'] = round(df['buy_price'] * df['count'], 2)
+        df['current_sum'] = round(df['current_price'] * df['count'], 2)
+        df['change_sum'] = round(df['current_sum'] - df['buy_sum'], 2)
 
-    def merge_bonds_data(self):
-        bonds_market_data = BondsMarket().update_stock_data()
-        data = self.load_from_db()
-        data = data.merge(bonds_market_data, how='inner', left_on='ticker', right_on='ticker')
-        return data
+        if columns is None:
+            columns = [
+                'ticker',
+                'name',
+                'isin',
+                'date',
+                'buy_price',
+                'current_price',
+                'commission',
+                'count',
+                'lotsize',
+                'market_cap',
+                'listlevel',
+                'sectype',
+                'buy_sum',
+                'current_sum',
+                'income'
+            ]  # Оставляем нужные столбцы
+        return df[columns]
 
-    def get_bonds_data(self) -> DataFrame:
-        data = self.merge_bonds_data()
-        data['current_price'] = (data['price'] / 100 * data['nominal']) + data['nkd']
-        '''Убираем лишние столбцы'''
-        data = data[['longname', 'current_price', 'count', 'effectiveyield', 'couponperiod', 'duration',
-                     'issuesize', 'enddate']]
-        return data
+    def get_bonds_report(self, columns: list = None) -> DataFrame:
+        bonds_market_df = BondsMarket.update_stock_data()
+        df = self.get_from_file().merge(bonds_market_df, how='inner', left_on='ticker', right_on='ticker')
+        df['current_price'] = (df['price'] / 100 * df['nominal']) + df['nkd']
+        if columns is None:
+            columns = [
+                'longname',
+                'current_price',
+                'count',
+                'effectiveyield',
+                'couponperiod',
+                'duration',
+                'issuesize',
+                'enddate'
+            ]    # Оставляем нужные столбцы
+        return df[columns]

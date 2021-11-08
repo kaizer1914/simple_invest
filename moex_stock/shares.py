@@ -1,17 +1,13 @@
 import pandas
 from pandas import DataFrame
-from sqlalchemy import create_engine
 
 
 # https://iss.moex.com/iss/engines/stock/markets/shares/securities.xml?iss.meta=off - список всех акций
 # https://iss.moex.com/iss/engines/stock/markets/shares.xml?iss.meta=off  - справка по рынкам акций
 
 class SharesMarket:
-    def __init__(self):
-        self.engine = create_engine('postgresql://kirill@localhost/invest')
-        self.table = 'shares_market'
-
-    def update_stock_data(self) -> DataFrame:
+    @staticmethod
+    def update_stock_data() -> DataFrame:
         url = 'https://iss.moex.com/iss/engines/stock/markets/shares/securities.json?iss.meta=off'
 
         response_data = pandas.read_json(url)
@@ -55,7 +51,7 @@ class SharesMarket:
         securities_data = securities_data.rename(columns={'SHORTNAME': 'shortname',
                                                           'SECNAME': 'longname',
                                                           'ISIN': 'isin',
-                                                          'LAST': 'price',
+                                                          'LAST': 'current_price',
                                                           'DECIMALS': 'decimals',
                                                           'LOTSIZE': 'lotsize',
                                                           'CURRENCYID': 'currency',
@@ -63,9 +59,4 @@ class SharesMarket:
                                                           'SECTYPE': 'sectype',
                                                           'LISTLEVEL': 'listlevel'
                                                           })
-        securities_data.to_sql(self.table, self.engine, if_exists='replace')  # Сохраняем в БД
         return securities_data
-
-    def get_stock_data(self) -> DataFrame:
-        data = pandas.read_sql_table(self.table, self.engine)
-        return data
