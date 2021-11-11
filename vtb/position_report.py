@@ -66,40 +66,20 @@ class PositionReport:
         df['weight'] = round(df['current_sum'] / sum_shares * 100, 2)
 
         if columns is None:
-            columns = [
-                'ticker',
-                'name',
-                'isin',
-                'date',
-                'buy_price',
-                'current_price',
-                'commission',
-                'count',
-                'lotsize',
-                'market_cap',
-                'listlevel',
-                'sectype',
-                'buy_sum',
-                'current_sum',
-                'change_sum',
-                'income',
-                'weight',
-            ]  # Оставляем нужные столбцы
-        return df[columns]
+            return df
+        else:
+            return df[columns]
 
     def get_bonds_report(self, columns: list = None) -> DataFrame:
         bonds_market_df = BondsMarket.update_stock_data()
+        '''Результат слияния датасета брокерского отчета с рынком облигаций биржи'''
         df = self.get_from_file().merge(bonds_market_df, how='inner', left_on='ticker', right_on='ticker')
+        df = df.rename(columns={'longname': 'name'})
+
         df['current_price'] = round((df['price'] / 100 * df['nominal']) + df['nkd'], 2)
+        df['current_sum'] = round(df['current_price'] * df['count'], 2)
+
         if columns is None:
-            columns = [
-                'longname',
-                'current_price',
-                'count',
-                'effectiveyield',
-                'couponperiod',
-                'duration',
-                'issuesize',
-                'enddate'
-            ]    # Оставляем нужные столбцы
-        return df[columns]
+            return df
+        else:
+            return df[columns]

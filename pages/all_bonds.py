@@ -1,10 +1,10 @@
 from dash_bootstrap_components import Table
 
-from moex_stock.shares import SharesMarket
+from moex_stock.bonds import BondsMarket
 
-dataframe = SharesMarket.update_stock_data()
+dataframe = BondsMarket.update_stock_data()
 
-url = '/all-shares'
+url = '/all-bonds'
 
 table = Table.from_dataframe(dataframe, striped=True, hover=True)
 layout = table
