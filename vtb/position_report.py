@@ -53,14 +53,17 @@ class PositionReport:
 
     def get_shares_report(self, columns: list = None) -> DataFrame:
         shares_market_df = SharesMarket.update_stock_data()
-        ''' Результат слияния датасета брокерского отчета с рынком акций биржи'''
+        '''Результат слияния датасета брокерского отчета с рынком акций биржи'''
         df = self.get_from_file().merge(shares_market_df, how='inner', left_on='ticker', right_on='ticker')
         df = df.rename(columns={'longname': 'name'})
 
-        df['income'] = round((df['current_price'] - df['buy_price']) / df['buy_price'] * 100, 2)
         df['buy_sum'] = round(df['buy_price'] * df['count'], 2)
         df['current_sum'] = round(df['current_price'] * df['count'], 2)
         df['change_sum'] = round(df['current_sum'] - df['buy_sum'], 2)
+
+        df['income'] = round((df['current_price'] - df['buy_price']) / df['buy_price'] * 100, 2)
+        sum_shares = df.current_sum.sum(axis=0)
+        df['weight'] = round(df['current_sum'] / sum_shares * 100, 2)
 
         if columns is None:
             columns = [
@@ -78,14 +81,16 @@ class PositionReport:
                 'sectype',
                 'buy_sum',
                 'current_sum',
-                'income'
+                'change_sum',
+                'income',
+                'weight',
             ]  # Оставляем нужные столбцы
         return df[columns]
 
     def get_bonds_report(self, columns: list = None) -> DataFrame:
         bonds_market_df = BondsMarket.update_stock_data()
         df = self.get_from_file().merge(bonds_market_df, how='inner', left_on='ticker', right_on='ticker')
-        df['current_price'] = (df['price'] / 100 * df['nominal']) + df['nkd']
+        df['current_price'] = round((df['price'] / 100 * df['nominal']) + df['nkd'], 2)
         if columns is None:
             columns = [
                 'longname',
