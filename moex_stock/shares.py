@@ -59,4 +59,15 @@ class SharesMarket:
                                                           'SECTYPE': 'sectype',
                                                           'LISTLEVEL': 'listlevel'
                                                           })
+
+        '''Замена значений типа бумаги на более понятные'''
+        securities_data['sectype'] = securities_data['sectype'].replace('1', 'usual')
+        securities_data['sectype'] = securities_data['sectype'].replace('2', 'pref')
+        securities_data['sectype'] = securities_data['sectype'].replace('9', 'open_pif')
+        securities_data['sectype'] = securities_data['sectype'].replace('A', 'interval_pif')
+        securities_data['sectype'] = securities_data['sectype'].replace('B', 'close_pif')
+        securities_data['sectype'] = securities_data['sectype'].replace('D', 'dr')
+        securities_data['sectype'] = securities_data['sectype'].replace('E', 'etf')
+        securities_data['sectype'] = securities_data['sectype'].replace('J', 'stock_pif')
+
         return securities_data
