@@ -44,6 +44,10 @@ class EtfParser:
                 gold_index = data.index(row)
             elif row[0] == 'Смешанные активы':
                 mix_assets_index = data.index(row)
+            else:
+                row[1] = row[1].replace('\n', '').replace('\r', '').replace('\t', '')
+                row[2] = row[2].replace('\n', '').replace('\r', '').replace('\t', '')
+                row[3] = row[3].replace('\n', '').replace('\r', '').replace('\t', '')
 
         self.__bonds_list = data[bonds_index + 1:cash_index]
         self.__cash_list = data[cash_index + 1:shares_index]
@@ -52,11 +56,6 @@ class EtfParser:
         self.__mix_assets_list = data[mix_assets_index + 1:]
 
     def get_bonds_df(self):
-        for row in self.__bonds_list:
-            row[1] = row[1].replace('\n', '').replace('\r', '').replace('\t', '')
-            row[2] = row[2].replace('\n', '').replace('\r', '').replace('\t', '')
-            row[3] = row[3].replace('\n', '').replace('\r', '').replace('\t', '')
-
         df = pandas.DataFrame(self.__bonds_list)
         df = df.rename({
             1: 'fund',
@@ -74,4 +73,4 @@ class EtfParser:
 if __name__ == '__main__':
     parser = EtfParser()
     dataframe = parser.get_bonds_df()
-    print(dataframe['ticker'])
+    print(dataframe['fund'])
