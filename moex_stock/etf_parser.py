@@ -58,43 +58,23 @@ class EtfParser:
                 row[2] = row[2].replace('\n', '').replace('\r', '').replace('\t', '')
                 row[3] = row[3].replace('\n', '').replace('\r', '').replace('\t', '')
 
-        self.__bonds_list = data[bonds_index + 1:cash_index]
-        self.__cash_list = data[cash_index + 1:shares_index]
-        self.__shares_list = data[shares_index + 1:products_index]
-        self.__gold_list = data[gold_index + 1:mix_assets_index]
-        self.__mix_assets_list = data[mix_assets_index + 1:]
+        bonds_df = pandas.DataFrame(data[bonds_index + 1:cash_index])
+        cash_df = pandas.DataFrame(data[cash_index + 1:shares_index])
+        shares_df = pandas.DataFrame(data[shares_index + 1:products_index])
+        gold_df = pandas.DataFrame(data[gold_index + 1:mix_assets_index])
+        mix_assets_df = pandas.DataFrame(data[mix_assets_index + 1:])
 
-    def get_bonds_df(self):
-        df = pandas.DataFrame(self.__bonds_list)
+        bonds_df['category'] = 'bonds'
+        cash_df['category'] = 'cash'
+        shares_df['category'] = 'shares'
+        gold_df['category'] = 'gold'
+        mix_assets_df['category'] = 'mix_assets'
+
+        df = pandas.concat([bonds_df, cash_df, shares_df, gold_df, mix_assets_df], ignore_index=True, axis='rows')
         df = df.rename(self.columns, axis='columns')
         df = df.drop(0, axis='columns')  # Удаляем номера строк
         df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
-        return df
+        self.__etf_df = df
 
-    def get_cash_df(self):
-        df = pandas.DataFrame(self.__cash_list)
-        df = df.rename(self.columns, axis='columns')
-        df = df.drop(0, axis='columns')  # Удаляем номера строк
-        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
-        return df
-
-    def get_shares_df(self):
-        df = pandas.DataFrame(self.__shares_list)
-        df = df.rename(self.columns, axis='columns')
-        df = df.drop(0, axis='columns')  # Удаляем номера строк
-        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
-        return df
-
-    def get_gold_df(self):
-        df = pandas.DataFrame(self.__gold_list)
-        df = df.rename(self.columns, axis='columns')
-        df = df.drop(0, axis='columns')  # Удаляем номера строк
-        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
-        return df
-
-    def get_mix_assets_df(self):
-        df = pandas.DataFrame(self.__mix_assets_list)
-        df = df.rename(self.columns, axis='columns')
-        df = df.drop(0, axis='columns')  # Удаляем номера строк
-        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
-        return df
+    def get_df(self):
+        return self.__etf_df
