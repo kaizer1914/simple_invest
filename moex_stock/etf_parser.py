@@ -10,6 +10,15 @@ from bs4 import BeautifulSoup
 
 
 class EtfParser:
+    columns = {
+        1: 'fund',
+        2: 'provider',
+        3: 'base_asset',
+        4: 'currency',
+        5: 'type',
+        6: 'ticker',
+    }
+
     def __init__(self):
         url = 'https://www.moex.com/msn/etf'
         response = requests.get(url)
@@ -57,20 +66,35 @@ class EtfParser:
 
     def get_bonds_df(self):
         df = pandas.DataFrame(self.__bonds_list)
-        df = df.rename({
-            1: 'fund',
-            2: 'provider',
-            3: 'base_asset',
-            4: 'currency',
-            5: 'type',
-            6: 'ticker',
-        }, axis='columns')
+        df = df.rename(self.columns, axis='columns')
         df = df.drop(0, axis='columns')  # Удаляем номера строк
         df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
         return df
 
+    def get_cash_df(self):
+        df = pandas.DataFrame(self.__cash_list)
+        df = df.rename(self.columns, axis='columns')
+        df = df.drop(0, axis='columns')  # Удаляем номера строк
+        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
+        return df
 
-if __name__ == '__main__':
-    parser = EtfParser()
-    dataframe = parser.get_bonds_df()
-    print(dataframe['fund'])
+    def get_shares_df(self):
+        df = pandas.DataFrame(self.__shares_list)
+        df = df.rename(self.columns, axis='columns')
+        df = df.drop(0, axis='columns')  # Удаляем номера строк
+        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
+        return df
+
+    def get_gold_df(self):
+        df = pandas.DataFrame(self.__gold_list)
+        df = df.rename(self.columns, axis='columns')
+        df = df.drop(0, axis='columns')  # Удаляем номера строк
+        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
+        return df
+
+    def get_mix_assets_df(self):
+        df = pandas.DataFrame(self.__mix_assets_list)
+        df = df.rename(self.columns, axis='columns')
+        df = df.drop(0, axis='columns')  # Удаляем номера строк
+        df = df.drop(7, axis='columns')  # Удаляем бесполезную колонку
+        return df
