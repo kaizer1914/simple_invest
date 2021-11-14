@@ -1,3 +1,4 @@
+import pandas
 import plotly.express as px
 from dash import dcc, html, Output, Input
 from dash.dcc import Graph
@@ -32,6 +33,7 @@ change_sum_label = 'Изменение суммы, ₽'
 current_sum_label = 'Текущая сумма, ₽'
 income_label = 'Прибыль, %'
 weight_label = 'Доля, %'
+sectype_label = 'Тип'
 
 layout = Row([
     dcc.Upload(
@@ -47,8 +49,8 @@ layout = Row([
 ])
 
 
-def add_shares_weight_graph(position_report) -> Graph:
-    df = position_report.get_shares_report(['name', 'ticker', 'current_sum'])
+def add_shares_weight_graph(shares_df) -> Graph:
+    df = shares_df[['name', 'ticker', 'current_sum']]
     pie_fig = px.pie(df, values='current_sum', names='name', hover_data=['ticker'],
                      labels={
                          'ticker': ticker_label,
@@ -61,8 +63,8 @@ def add_shares_weight_graph(position_report) -> Graph:
     return pie_graph
 
 
-def add_shares_sum_graph(position_report) -> Graph:
-    df = position_report.get_shares_report(['name', 'ticker', 'current_sum', 'change_sum'])
+def add_shares_sum_graph(shares_df) -> Graph:
+    df = shares_df[['name', 'ticker', 'current_sum', 'change_sum']]
     bar_fig = px.bar(df, x='ticker', y='current_sum', color='change_sum', hover_data=['name'],
                      labels={
                          'ticker': ticker_label,
@@ -76,8 +78,8 @@ def add_shares_sum_graph(position_report) -> Graph:
     return bar_graph
 
 
-def add_shares_income_graph(position_report) -> Graph:
-    shares_income_df = position_report.get_shares_report(['name', 'ticker', 'change_sum', 'current_sum'])
+def add_shares_income_graph(shares_df) -> Graph:
+    shares_income_df = shares_df[['name', 'ticker', 'change_sum', 'current_sum']]
     bar_fig = px.bar(shares_income_df, x='ticker', y='change_sum',
                      # color='change_sum',
                      hover_data=['name', 'current_sum'],
@@ -93,9 +95,8 @@ def add_shares_income_graph(position_report) -> Graph:
     return bar_graph
 
 
-def add_shares_table_part(position_report) -> Col:
-    shares_df = position_report.get_shares_report(['ticker', 'name', 'count', 'buy_sum', 'change_sum', 'current_sum',
-                                                   'income', 'weight'])
+def add_shares_table_part(shares_df) -> Col:
+    shares_df = shares_df[['ticker', 'name', 'count', 'buy_sum', 'change_sum', 'current_sum', 'income', 'weight']]
     shares_table = Table.from_dataframe(shares_df, striped=True, hover=True,
                                         header={
                                             'ticker': ticker_label,
@@ -110,22 +111,22 @@ def add_shares_table_part(position_report) -> Col:
     return Col([shares_table], style={'marginTop': '20px'})
 
 
-def add_bonds_table_part(position_report) -> Col:
-    bonds_df = position_report.get_bonds_report()
+def add_bonds_table_part(bonds_df) -> Col:
     bonds_table = Table.from_dataframe(bonds_df, striped=True, hover=True)
     return bonds_table
 
 
-def add_bonds_type_part(position_report) -> Graph:
-    bonds_sectype_df = position_report.get_bonds_report(['name', 'sectype', 'current_sum'])
+def add_bonds_type_part(bonds_df, bonds_etf_df) -> Graph:
+    bonds_sectype_df = bonds_df[['sectype', 'current_sum']]
+    bonds_etf_df = bonds_etf_df[['sectype', 'current_sum']]
+    bonds_sectype_df = pandas.concat([bonds_sectype_df, bonds_etf_df])
+
     pie_fig = px.pie(bonds_sectype_df, values='current_sum', names='sectype',
-                     # hover_data=['ticker'],
-                     # labels={
-                     #     'ticker': ticker_label,
-                     #     'name': name_label,
-                     #     'current_sum': current_sum_label,
-                     # },
-                     # title='Распределение по долям',
+                     labels={
+                         'current_sum': current_sum_label,
+                         'sectype': sectype_label,
+                     },
+                     title='Распределение по типу',
                      template='plotly_dark')
     pie_graph = Graph(figure=pie_fig, style={'marginTop': '20px'})
     return pie_graph
@@ -140,12 +141,16 @@ def upload_position_report(contents):
     elif contents is not None:
         position_report = PositionReport(contents)
 
-        shares_report = Row([add_shares_weight_graph(position_report),
-                             add_shares_sum_graph(position_report),
-                             add_shares_income_graph(position_report),
-                             add_shares_table_part(position_report)])
-        bonds_report = Row([add_bonds_type_part(position_report),
-                            add_bonds_table_part(position_report)])
+        shares_report = Row([
+            add_shares_weight_graph(position_report.shares_df),
+            add_shares_sum_graph(position_report.shares_df),
+            add_shares_income_graph(position_report.shares_df),
+            add_shares_table_part(position_report.shares_df),
+        ])
+        bonds_report = Row([
+            add_bonds_type_part(position_report.bonds_df, position_report.bonds_etf_df),
+            add_bonds_table_part(position_report.bonds_df),
+        ])
 
         total_report = html.P('Не готов')
         return total_report, shares_report, bonds_report

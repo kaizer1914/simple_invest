@@ -64,12 +64,12 @@ class BondsMarket:
                                                           })
 
         '''Замена значений типа бумаги на более понятные'''
-        securities_data['sectype'] = securities_data['sectype'].replace('3', 'ofz')
-        securities_data['sectype'] = securities_data['sectype'].replace('4', 'region')
-        securities_data['sectype'] = securities_data['sectype'].replace('5', 'central_bank')
-        securities_data['sectype'] = securities_data['sectype'].replace('6', 'corp')
-        securities_data['sectype'] = securities_data['sectype'].replace('7', 'mfo')
-        securities_data['sectype'] = securities_data['sectype'].replace('8', 'corp')
-        securities_data['sectype'] = securities_data['sectype'].replace('C', 'region')
+        securities_data['sectype'] = securities_data['sectype'].replace('3', 'ОФЗ')
+        securities_data['sectype'] = securities_data['sectype'].replace('4', 'Региональные')
+        securities_data['sectype'] = securities_data['sectype'].replace('5', 'ЦБ')
+        securities_data['sectype'] = securities_data['sectype'].replace('6', 'Корпоративные')
+        securities_data['sectype'] = securities_data['sectype'].replace('7', 'МФО')
+        securities_data['sectype'] = securities_data['sectype'].replace('8', 'Корпоративные')
+        securities_data['sectype'] = securities_data['sectype'].replace('C', 'Региональные')
 
         return securities_data

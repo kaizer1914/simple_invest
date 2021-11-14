@@ -67,7 +67,7 @@ class SharesMarket:
         securities_data['sectype'] = securities_data['sectype'].replace('A', 'interval_pif')
         securities_data['sectype'] = securities_data['sectype'].replace('B', 'close_pif')
         securities_data['sectype'] = securities_data['sectype'].replace('D', 'dr')
-        securities_data['sectype'] = securities_data['sectype'].replace('E', 'etf')
+        securities_data['sectype'] = securities_data['sectype'].replace('E', 'ETF')
         securities_data['sectype'] = securities_data['sectype'].replace('J', 'stock_pif')
 
         return securities_data

@@ -4,16 +4,28 @@ from io import StringIO
 import pandas
 from pandas import DataFrame
 
+from etf_parser import EtfParser
 from moex_stock.bonds import BondsMarket
 from moex_stock.shares import SharesMarket
 
 
 class PositionReport:
     def __init__(self, file: str):
-        self.file = file
+        self.position_df = self.__get_position_report(file)
+        self.shares_df = self.__get_shares_report()
+        self.bonds_df = self.__get_bonds_report()
 
-    def get_from_file(self) -> DataFrame:
-        content_type, content_string = self.file.split(',')
+        self.bonds_etf_df = self.shares_df[self.shares_df['category'] == 'bonds']
+        self.gold_etf_df = self.shares_df[self.shares_df['category'] == 'gold']
+        self.cash_etf_df = self.shares_df[self.shares_df['category'] == 'cash']
+        self.mix_assets_etf_df = self.shares_df[self.shares_df['category'] == 'mix_assets']
+
+        self.shares_df = self.shares_df.drop(self.shares_df[self.shares_df['category'] == 'bonds'].index)
+        self.shares_df = self.shares_df.drop(self.shares_df[self.shares_df['category'] == 'gold'].index)
+        self.shares_df = self.shares_df.drop(self.shares_df[self.shares_df['category'] == 'cash'].index)
+
+    def __get_position_report(self, file: str) -> DataFrame:
+        content_type, content_string = file.split(',')
         decoded_str = b64decode(content_string)
         load_data = pandas.read_csv(StringIO(decoded_str.decode('utf-8')))
 
@@ -38,10 +50,6 @@ class PositionReport:
             # строчку из датафрейма
             position_df = position_df.append(series, ignore_index=True)  # Добавляем строку в новый датафрейм
 
-        # position_df.index = position_df['textBox14']  # Назначаем колонку с тикером в качествет идентификатора
-        # position_df.index.name = 'ticker'  # Назначаем имя колонки идентификатора
-        # position_df = position_df.drop(['textBox14'], axis='columns')  # Удаляем уже ненужную колонку с тикером
-
         ''' Переименовываем колонки '''
         position_df = position_df.rename(columns={'textBox1': 'position_name',
                                                   'textBox2': 'date',
@@ -51,10 +59,13 @@ class PositionReport:
                                                   'textBox8': 'commission'})
         return position_df
 
-    def get_shares_report(self, columns: list = None) -> DataFrame:
+    def __get_shares_report(self) -> DataFrame:
         shares_market_df = SharesMarket.update_stock_data()
+        all_etf_df = EtfParser().get_df()
+        shares_market_df = shares_market_df.merge(all_etf_df, how='left', on='ticker')
+
         '''Результат слияния датасета брокерского отчета с рынком акций биржи'''
-        df = self.get_from_file().merge(shares_market_df, how='inner', left_on='ticker', right_on='ticker')
+        df = self.position_df.merge(shares_market_df, how='inner', on='ticker')
         df = df.rename(columns={'longname': 'name'})
 
         df['buy_sum'] = round(df['buy_price'] * df['count'], 2)
@@ -64,22 +75,14 @@ class PositionReport:
         df['income'] = round((df['current_price'] - df['buy_price']) / df['buy_price'] * 100, 2)
         sum_shares = df.current_sum.sum(axis=0)
         df['weight'] = round(df['current_sum'] / sum_shares * 100, 2)
+        return df
 
-        if columns is None:
-            return df
-        else:
-            return df[columns]
-
-    def get_bonds_report(self, columns: list = None) -> DataFrame:
+    def __get_bonds_report(self) -> DataFrame:
         bonds_market_df = BondsMarket.update_stock_data()
         '''Результат слияния датасета брокерского отчета с рынком облигаций биржи'''
-        df = self.get_from_file().merge(bonds_market_df, how='inner', left_on='ticker', right_on='ticker')
+        df = self.position_df.merge(bonds_market_df, how='inner', on='ticker')
         df = df.rename(columns={'longname': 'name'})
 
         df['current_price'] = round((df['price'] / 100 * df['nominal']) + df['nkd'], 2)
         df['current_sum'] = round(df['current_price'] * df['count'], 2)
-
-        if columns is None:
-            return df
-        else:
-            return df[columns]
+        return df
