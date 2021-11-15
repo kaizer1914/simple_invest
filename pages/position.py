@@ -95,7 +95,7 @@ def add_shares_income_graph(shares_df) -> Graph:
     return bar_graph
 
 
-def add_shares_table_part(shares_df) -> Col:
+def add_shares_table(shares_df) -> Col:
     shares_df = shares_df[['ticker', 'name', 'count', 'buy_sum', 'change_sum', 'current_sum', 'income', 'weight']]
     shares_table = Table.from_dataframe(shares_df, striped=True, hover=True,
                                         header={
@@ -111,12 +111,19 @@ def add_shares_table_part(shares_df) -> Col:
     return Col([shares_table], style={'marginTop': '20px'})
 
 
-def add_bonds_table_part(bonds_df) -> Col:
+def add_bonds_table(bonds_df) -> Col:
+    # bonds_df = bonds_df[['name', 'count', ]]
     bonds_table = Table.from_dataframe(bonds_df, striped=True, hover=True)
     return bonds_table
 
 
-def add_bonds_type_part(bonds_df, bonds_etf_df) -> Graph:
+def add_bonds_company_graph(bonds_df):
+    get_company_name = lambda longname: longname.rsplit(' ', 1)[0]
+    bonds_df['company'] = bonds_df['name'].apply(get_company_name)
+    print(bonds_df)
+
+
+def add_bonds_type_graph(bonds_df, bonds_etf_df) -> Graph:
     bonds_sectype_df = bonds_df[['sectype', 'current_sum']]
     bonds_etf_df = bonds_etf_df[['sectype', 'current_sum']]
     bonds_sectype_df = pandas.concat([bonds_sectype_df, bonds_etf_df])
@@ -140,16 +147,17 @@ def upload_position_report(contents):
         return alert, alert, alert
     elif contents is not None:
         position_report = PositionReport(contents)
+        add_bonds_company_graph(position_report.bonds_df)
 
         shares_report = Row([
             add_shares_weight_graph(position_report.shares_df),
             add_shares_sum_graph(position_report.shares_df),
             add_shares_income_graph(position_report.shares_df),
-            add_shares_table_part(position_report.shares_df),
+            add_shares_table(position_report.shares_df),
         ])
         bonds_report = Row([
-            add_bonds_type_part(position_report.bonds_df, position_report.bonds_etf_df),
-            add_bonds_table_part(position_report.bonds_df),
+            add_bonds_type_graph(position_report.bonds_df, position_report.bonds_etf_df),
+            add_bonds_table(position_report.bonds_df),
         ])
 
         total_report = html.P('Не готов')
