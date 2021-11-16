@@ -34,6 +34,7 @@ current_sum_label = 'Текущая сумма, ₽'
 income_label = 'Прибыль, %'
 weight_label = 'Доля, %'
 sectype_label = 'Тип'
+company_label = 'Эмитент'
 
 layout = Row([
     dcc.Upload(
@@ -57,7 +58,7 @@ def add_shares_weight_graph(shares_df) -> Graph:
                          'name': name_label,
                          'current_sum': current_sum_label,
                      },
-                     title='Распределение по долям',
+                     title='По долям',
                      template='plotly_dark')
     pie_graph = Graph(figure=pie_fig, style={'marginTop': '20px'})
     return pie_graph
@@ -72,7 +73,7 @@ def add_shares_sum_graph(shares_df) -> Graph:
                          'current_sum': current_sum_label,
                          'change_sum': change_sum_label,
                      },
-                     title='Распределение по сумме',
+                     title='По сумме',
                      template='plotly_dark')
     bar_graph = Graph(figure=bar_fig, style={'marginTop': '20px'})
     return bar_graph
@@ -89,7 +90,7 @@ def add_shares_income_graph(shares_df) -> Graph:
                          'current_sum': current_sum_label,
                          'change_sum': change_sum_label,
                      },
-                     title='Распределение по доходности',
+                     title='По доходности',
                      template='plotly_dark')
     bar_graph = Graph(figure=bar_fig, style={'marginTop': '20px'})
     return bar_graph
@@ -112,15 +113,44 @@ def add_shares_table(shares_df) -> Col:
 
 
 def add_bonds_table(bonds_df) -> Col:
-    # bonds_df = bonds_df[['name', 'count', ]]
-    bonds_table = Table.from_dataframe(bonds_df, striped=True, hover=True)
+    bonds_table_df = bonds_df
+    bonds_table = Table.from_dataframe(bonds_table_df, striped=True, hover=True)
     return bonds_table
 
 
-def add_bonds_company_graph(bonds_df):
-    get_company_name = lambda longname: longname.rsplit(' ', 1)[0]
-    bonds_df['company'] = bonds_df['name'].apply(get_company_name)
-    print(bonds_df)
+def add_bonds_company_graphs(bonds_df):
+    bonds_company_df = bonds_df[['name', 'current_sum', 'sectype']]
+    company = lambda longname: longname.rsplit(' ', 1)[0]
+    ofz = lambda longname: longname.split(' ', 1)[0]
+
+    bonds_ofz_df = bonds_company_df[bonds_company_df['sectype'].isin(['ОФЗ'])]
+    bonds_ofz_df['company'] = bonds_ofz_df['name'].apply(ofz)
+
+    bonds_region_df = bonds_company_df[bonds_company_df['sectype'].isin(['Региональные'])]
+    bonds_region_df['company'] = bonds_region_df['name'].apply(company)
+
+    bonds_corp_df = bonds_company_df[bonds_company_df['sectype'].isin(['Корпоративные'])]
+    bonds_corp_df['company'] = bonds_corp_df['name'].apply(company)
+
+    bonds_corp_df.groupby('name').sum()
+    bonds_region_df.groupby('name').sum()
+    bonds_ofz_df.groupby('name').sum()
+
+    labels = {'current_sum': current_sum_label, 'company': company_label}
+
+    pie_corp_fig = px.pie(bonds_corp_df, values='current_sum', names='company', labels=labels,
+                          title='Корпоративные облигации по эмитентам', template='plotly_dark')
+    pie_region_fig = px.pie(bonds_region_df, values='current_sum', names='company', labels=labels,
+                            title='Региональные облигации по эмитентам', template='plotly_dark')
+    pie_ofz_fig = px.pie(bonds_ofz_df, values='current_sum', names='company', labels=labels,
+                         title='Федеральные облигации по типу', template='plotly_dark')
+
+    pie_corp_graph = Graph(figure=pie_corp_fig, style={'marginTop': '20px'})
+    pie_region_graph = Graph(figure=pie_region_fig, style={'marginTop': '20px'})
+    pie_ofz_graph = Graph(figure=pie_ofz_fig, style={'marginTop': '20px'})
+
+    pie_corp_fig.update_traces(textinfo='none')
+    return Col([pie_corp_graph, pie_region_graph, pie_ofz_graph])
 
 
 def add_bonds_type_graph(bonds_df, bonds_etf_df) -> Graph:
@@ -133,7 +163,7 @@ def add_bonds_type_graph(bonds_df, bonds_etf_df) -> Graph:
                          'current_sum': current_sum_label,
                          'sectype': sectype_label,
                      },
-                     title='Распределение по типу',
+                     title='По типу',
                      template='plotly_dark')
     pie_graph = Graph(figure=pie_fig, style={'marginTop': '20px'})
     return pie_graph
@@ -147,7 +177,6 @@ def upload_position_report(contents):
         return alert, alert, alert
     elif contents is not None:
         position_report = PositionReport(contents)
-        add_bonds_company_graph(position_report.bonds_df)
 
         shares_report = Row([
             add_shares_weight_graph(position_report.shares_df),
@@ -157,6 +186,7 @@ def upload_position_report(contents):
         ])
         bonds_report = Row([
             add_bonds_type_graph(position_report.bonds_df, position_report.bonds_etf_df),
+            add_bonds_company_graphs(position_report.bonds_df),
             add_bonds_table(position_report.bonds_df),
         ])
 
