@@ -24,6 +24,8 @@ class PositionReport:
         self.shares_df = self.shares_df.drop(self.shares_df[self.shares_df['category'] == 'gold'].index)
         self.shares_df = self.shares_df.drop(self.shares_df[self.shares_df['category'] == 'cash'].index)
 
+        self.total_df = self.__get_total_report()
+
     def __get_position_report(self, file: str) -> DataFrame:
         content_type, content_string = file.split(',')
         decoded_str = b64decode(content_string)
@@ -83,6 +85,23 @@ class PositionReport:
         df = self.position_df.merge(bonds_market_df, how='inner', on='ticker')
         df = df.rename(columns={'longname': 'name'})
 
+        df['effectiveyield'] = round(df['effectiveyield'], 2)
         df['current_price'] = round((df['price'] / 100 * df['nominal']) + df['nkd'], 2)
         df['current_sum'] = round(df['current_price'] * df['count'], 2)
         return df
+
+    def __get_total_report(self) -> DataFrame:
+        total_bonds = pandas.concat([self.bonds_df, self.bonds_etf_df])
+
+        shares_sum = round(self.shares_df['current_sum'].sum(), 2)
+        bonds_sum = round(total_bonds['current_sum'].sum(), 2)
+        gold_sum = round(self.gold_etf_df['current_sum'].sum(), 2)
+        cash_sum = round(self.cash_etf_df['current_sum'].sum(), 2)
+
+        total_df = pandas.DataFrame([['Акции', shares_sum],
+                                     ['Облигации', bonds_sum],
+                                     ['Золото', gold_sum],
+                                     ['Денежный рынок', cash_sum]],
+                                    columns=['assets', 'sum'])
+        print(total_df)
+        return total_df

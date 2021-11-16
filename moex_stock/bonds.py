@@ -65,11 +65,11 @@ class BondsMarket:
 
         '''Замена значений типа бумаги на более понятные'''
         securities_data['sectype'] = securities_data['sectype'].replace('3', 'ОФЗ')
-        securities_data['sectype'] = securities_data['sectype'].replace('4', 'Региональные')
+        securities_data['sectype'] = securities_data['sectype'].replace('4', 'Муниципальные')
         securities_data['sectype'] = securities_data['sectype'].replace('5', 'ЦБ')
         securities_data['sectype'] = securities_data['sectype'].replace('6', 'Корпоративные')
         securities_data['sectype'] = securities_data['sectype'].replace('7', 'МФО')
         securities_data['sectype'] = securities_data['sectype'].replace('8', 'Корпоративные')
-        securities_data['sectype'] = securities_data['sectype'].replace('C', 'Региональные')
+        securities_data['sectype'] = securities_data['sectype'].replace('C', 'Муниципальные')
 
         return securities_data
