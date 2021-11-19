@@ -62,6 +62,9 @@ class BondsMarket:
                                                           'SECTYPE': 'sectype',
                                                           'LISTLEVEL': 'listlevel'
                                                           })
+        '''Округление по данным биржи'''
+        rounded = lambda x: round(x['price'], x['decimals'])
+        securities_data['price'] = securities_data.apply(rounded, axis=1)
 
         '''Замена значений типа бумаги на более понятные'''
         securities_data['sectype'] = securities_data['sectype'].replace('3', 'ОФЗ')

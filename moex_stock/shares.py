@@ -42,13 +42,9 @@ class SharesMarket:
             ['SECID', 'SHORTNAME', 'SECNAME', 'ISIN', 'LAST', 'DECIMALS', 'LOTSIZE', 'CURRENCYID',
              'ISSUECAPITALIZATION', 'SECTYPE', 'LISTLEVEL', 'ISSUESIZE']]
 
-        '''Назначаем тикер в качестве индекса'''
-        securities_data.index = securities_data['SECID']
-        securities_data.index.name = 'ticker'
-        securities_data = securities_data.drop(['SECID'], axis=1)
-
         '''Переименовываем колонки'''
         securities_data = securities_data.rename(columns={'SHORTNAME': 'shortname',
+                                                          'SECID': 'ticker',
                                                           'SECNAME': 'longname',
                                                           'ISIN': 'isin',
                                                           'LAST': 'current_price',
@@ -60,6 +56,9 @@ class SharesMarket:
                                                           'LISTLEVEL': 'listlevel',
                                                           'ISSUESIZE': 'issuesize',
                                                           })
+        '''Округление по данным биржи'''
+        rounded = lambda x: round(x['current_price'], x['decimals'])
+        securities_data['current_price'] = securities_data.apply(rounded, axis=1)
 
         '''Замена значений типа бумаги на более понятные'''
         securities_data['sectype'] = securities_data['sectype'].replace('1', 'usual')
