@@ -4,7 +4,7 @@ from dash import dcc, html, Output, Input
 from dash.dcc import Graph
 from dash_bootstrap_components import Tabs, Tab, Row, Table, Alert, Col
 
-from pages.application import app
+from dash_pages.application import app
 from vtb.position_report import PositionReport
 
 url = '/position'  # Локальный адрес страницы

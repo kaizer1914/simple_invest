@@ -3,8 +3,8 @@ from dash.dcc import Location
 from dash_bootstrap_components import Container, NavbarSimple, NavItem, NavLink, Row
 
 import all_bonds
-from pages import all_shares, position
-from pages.application import app
+from dash_pages import all_shares, position
+from dash_pages.application import app
 
 app.layout = Container([
     Location(id='url', refresh=False),

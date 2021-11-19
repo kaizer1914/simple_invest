@@ -40,7 +40,7 @@ class SharesMarket:
         '''Отбираем нужные колонки'''
         securities_data = securities_data[
             ['SECID', 'SHORTNAME', 'SECNAME', 'ISIN', 'LAST', 'DECIMALS', 'LOTSIZE', 'CURRENCYID',
-             'ISSUECAPITALIZATION', 'SECTYPE', 'LISTLEVEL']]
+             'ISSUECAPITALIZATION', 'SECTYPE', 'LISTLEVEL', 'ISSUESIZE']]
 
         '''Назначаем тикер в качестве индекса'''
         securities_data.index = securities_data['SECID']
@@ -57,7 +57,8 @@ class SharesMarket:
                                                           'CURRENCYID': 'currency',
                                                           'ISSUECAPITALIZATION': 'market_cap',
                                                           'SECTYPE': 'sectype',
-                                                          'LISTLEVEL': 'listlevel'
+                                                          'LISTLEVEL': 'listlevel',
+                                                          'ISSUESIZE': 'issuesize',
                                                           })
 
         '''Замена значений типа бумаги на более понятные'''
